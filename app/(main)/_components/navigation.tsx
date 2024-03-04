@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils';
 import { ChevronsLeft, MenuIcon } from 'lucide-react';
 import { usePathname } from 'next/navigation';
-import { ElementRef, useRef, useState } from 'react';
+import { ElementRef, use, useEffect, useRef, useState } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 
 export const Navigation = () => {
@@ -15,6 +15,20 @@ export const Navigation = () => {
 	const navbarRef = useRef<ElementRef<'div'>>(null); // Esto es para referenciar el navbar
 	const [isResetting, setIsResetting] = useState(false); // Esto es para saber si se esta reseteando el sidebar
 	const [isCollapsed, setIsCollapsed] = useState(isMobile); // Esto es para saber si el sidebar esta colapsado
+
+	useEffect(() => {
+		if (isMobile) {
+			collapse();
+		} else {
+			resetWidth();
+		}
+	}, [isMobile]); // Esto es para ejecutar algo cuando el componente se monte o actualice
+
+	useEffect(() => {
+		if (isMobile) {
+			collapse();
+		}
+	}, [pathanme, isMobile]); // Esto es para ejecutar algo cuando la ruta cambie o el dispositivo cambie
 
 	// Funcion para redimensionar el sidebar
 	const handleMauseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
