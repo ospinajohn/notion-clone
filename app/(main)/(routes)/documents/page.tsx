@@ -1,7 +1,7 @@
 const DocumentsPage = () => {
 	return (
 		<div>
-			<h1>Documents Page</h1>
+			<h1>This is a protected Documents page.</h1>
 		</div>
 	);
 };
