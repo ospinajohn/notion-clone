@@ -16,6 +16,7 @@ export const Navigation = () => {
 	const [isResetting, setIsResetting] = useState(false); // Esto es para saber si se esta reseteando el sidebar
 	const [isCollapsed, setIsCollapsed] = useState(isMobile); // Esto es para saber si el sidebar esta colapsado
 
+	// Funcion para redimensionar el sidebar
 	const handleMauseDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		e.preventDefault();
 		e.stopPropagation();
@@ -25,6 +26,7 @@ export const Navigation = () => {
 		document.addEventListener('mouseup', handleMouseUp); // Agregamos el evento mouseup
 	};
 
+	// funcion para redimensionar el sidebar con el mouse
 	const handleMouseMove = (event: MouseEvent) => {
 		if (!isResizingRef.current) return;
 		let newWidth = event.clientX;
@@ -42,10 +44,27 @@ export const Navigation = () => {
 		}
 	};
 
+	// Funcion para saber si se solto el mouse y quitar los eventos
 	const handleMouseUp = () => {
 		isResizingRef.current = false;
 		document.removeEventListener('mousemove', handleMouseMove);
 		document.removeEventListener('mouseup', handleMouseUp);
+	};
+
+	// Funcion para colapsar el sidebar
+	const resetWidth = () => {
+		if (sidebarRef.current && navbarRef.current) {
+			setIsCollapsed(false);
+			setIsResetting(true);
+
+			sidebarRef.current.style.width = isMobile ? '100%' : '240px';
+			navbarRef.current.style.setProperty(
+				'width',
+				isMobile ? '0' : 'calc(100% - 240px)'
+			);
+			navbarRef.current.style.setProperty('left', isMobile ? '100%' : '240px');
+			setTimeout(() => setIsResetting(false), 300);
+		}
 	};
 
 	return (
@@ -73,7 +92,7 @@ export const Navigation = () => {
 				</div>
 				<div
 					onMouseDown={handleMauseDown}
-					onClick={() => {}}
+					onClick={resetWidth}
 					className='opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-primary/10 top-0 right-0'
 				/>
 			</aside>
