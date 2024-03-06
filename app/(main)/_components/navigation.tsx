@@ -6,10 +6,14 @@ import { usePathname } from 'next/navigation';
 import { ElementRef, use, useEffect, useRef, useState } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 import { UserItem } from './user-item';
+import { useQuery } from 'convex/react';
+import { api } from '@/convex/_generated/api';
 
 export const Navigation = () => {
 	const pathanme = usePathname(); // Esto es para saber la ruta actual
 	const isMobile = useMediaQuery('(max-width: 768px)'); // Esto es para saber si estamos en un dispositivo movil
+
+	const documents = useQuery(api.documents.get); // Esto es para obtener todos los documentos
 
 	const isResizingRef = useRef(false); // Esto es para saber si se esta redimensionando el sidebar
 	const sidebarRef = useRef<ElementRef<'aside'>>(null); // Esto es para referenciar el sidebar
@@ -116,7 +120,11 @@ export const Navigation = () => {
 					<UserItem />
 				</div>
 				<div className='mt-4'>
-					<p>Documents</p>
+					{documents?.map(document => (
+						<div key={document._id} className='p-2'>
+							{document.title}
+						</div>
+					))}
 				</div>
 				<div
 					onMouseDown={handleMauseDown}

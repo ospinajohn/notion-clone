@@ -3,6 +3,21 @@ import { v } from 'convex/values';
 import { mutation, query } from './_generated/server';
 import { Doc, Id } from './_generated/dataModel';
 
+// This is a function that returns all documents in the database.
+export const get = query({
+	handler: async ctx => {
+		const identity = await ctx.auth.getUserIdentity();
+
+		if (!identity) {
+			throw new Error('Not authenticated');
+		}
+
+		const documents = await ctx.db.query('documents').collect();
+
+		return documents;
+	},
+});
+
 // This is a function that creates a new document in the database.
 export const create = mutation({
 	args: {
