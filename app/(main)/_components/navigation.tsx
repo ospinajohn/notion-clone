@@ -1,19 +1,22 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { ChevronsLeft, MenuIcon } from 'lucide-react';
+import { ChevronsLeft, MenuIcon, PlusCircle } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { ElementRef, use, useEffect, useRef, useState } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 import { UserItem } from './user-item';
-import { useQuery } from 'convex/react';
+import { useMutation, useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
+import { Item } from './item';
+import { toast } from 'sonner';
 
 export const Navigation = () => {
 	const pathanme = usePathname(); // Esto es para saber la ruta actual
 	const isMobile = useMediaQuery('(max-width: 768px)'); // Esto es para saber si estamos en un dispositivo movil
 
 	const documents = useQuery(api.documents.get); // Esto es para obtener todos los documentos
+	const create = useMutation(api.documents.create); // Esto es para crear un documento
 
 	const isResizingRef = useRef(false); // Esto es para saber si se esta redimensionando el sidebar
 	const sidebarRef = useRef<ElementRef<'aside'>>(null); // Esto es para referenciar el sidebar
@@ -98,6 +101,16 @@ export const Navigation = () => {
 		}
 	};
 
+	const handleCreate = () => {
+		const promise = create({ title: 'Untitled' });
+
+		toast.promise(promise, {
+			loading: 'Creating a new note...',
+			success: 'New note created!',
+			error: 'Failed to create a new note.',
+		});
+	};
+
 	return (
 		<>
 			<aside
@@ -118,6 +131,7 @@ export const Navigation = () => {
 				</div>
 				<div>
 					<UserItem />
+					<Item onClick={handleCreate} label='New page' icon={PlusCircle} />
 				</div>
 				<div className='mt-4'>
 					{documents?.map(document => (
