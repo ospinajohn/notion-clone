@@ -12,16 +12,16 @@ import { usePathname } from 'next/navigation';
 import { ElementRef, use, useEffect, useRef, useState } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
 import { UserItem } from './user-item';
-import { useMutation, useQuery } from 'convex/react';
+import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 import { Item } from './item';
 import { toast } from 'sonner';
+import { DocumentList } from './document-list';
 
 export const Navigation = () => {
 	const pathanme = usePathname(); // Esto es para saber la ruta actual
 	const isMobile = useMediaQuery('(max-width: 768px)'); // Esto es para saber si estamos en un dispositivo movil
 
-	const documents = useQuery(api.documents.get); // Esto es para obtener todos los documentos
 	const create = useMutation(api.documents.create); // Esto es para crear un documento
 
 	const isResizingRef = useRef(false); // Esto es para saber si se esta redimensionando el sidebar
@@ -151,11 +151,7 @@ export const Navigation = () => {
 					<Item onClick={handleCreate} label='New page' icon={PlusCircle} />
 				</div>
 				<div className='mt-4'>
-					{documents?.map(document => (
-						<div key={document._id} className='p-2'>
-							{document.title}
-						</div>
-					))}
+					<DocumentList />
 				</div>
 				<div
 					onMouseDown={handleMauseDown}
