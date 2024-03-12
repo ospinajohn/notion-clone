@@ -57,6 +57,7 @@ export const create = mutation({
 	},
 });
 
+// This is a function that archives a document and all of its children. 
 export const archive = mutation({
 	args: { id: v.id('documents') },
 	handler: async (ctx, args) => {
