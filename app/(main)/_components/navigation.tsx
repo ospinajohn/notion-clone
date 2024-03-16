@@ -24,6 +24,7 @@ import {
 import { Item } from './item';
 import { toast } from 'sonner';
 import { DocumentList } from './document-list';
+import { TrashBox } from './trash-box';
 
 export const Navigation = () => {
 	const pathanme = usePathname(); // Esto es para saber la ruta actual
@@ -167,8 +168,7 @@ export const Navigation = () => {
 						<PopoverContent
 							className='p-0 w-72'
 							side={isMobile ? 'bottom' : 'right'}>
-							{/* <TrashBox /> */}
-							TrashBox
+							<TrashBox />
 						</PopoverContent>
 					</Popover>
 				</div>
