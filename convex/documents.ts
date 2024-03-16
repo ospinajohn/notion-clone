@@ -57,7 +57,7 @@ export const create = mutation({
 	},
 });
 
-// This is a function that archives a document and all of its children. 
+// This is a function that archives a document and all of its children.
 export const archive = mutation({
 	args: { id: v.id('documents') },
 	handler: async (ctx, args) => {
@@ -103,5 +103,27 @@ export const archive = mutation({
 		recursiveArchive(args.id);
 
 		return document;
+	},
+});
+
+
+export const getTrash = query({
+	handler: async ctx => {
+		const identity = await ctx.auth.getUserIdentity();
+
+		if (!identity) {
+			throw new Error('Not authenticated');
+		}
+
+		const userId = identity.subject;
+
+		const documents = await ctx.db
+			.query('documents')
+			.withIndex('by_user', q => q.eq('userId', userId))
+			.filter(q => q.eq(q.field('isArchived'), true))
+			.order('desc')
+			.collect();
+
+		return documents;
 	},
 });
