@@ -25,8 +25,12 @@ import { Item } from './item';
 import { toast } from 'sonner';
 import { DocumentList } from './document-list';
 import { TrashBox } from './trash-box';
+import { useSettings } from '@/hooks/use-settings';
+import { useSearch } from '@/hooks/use-search';
 
 export const Navigation = () => {
+	const settings = useSettings();
+	const search = useSearch();
 	const pathanme = usePathname(); // Esto es para saber la ruta actual
 	const isMobile = useMediaQuery('(max-width: 768px)'); // Esto es para saber si estamos en un dispositivo movil
 
@@ -145,17 +149,8 @@ export const Navigation = () => {
 				</div>
 				<div>
 					<UserItem />
-					<Item
-						label='Search'
-						icon={Search}
-						isSearch
-						onClick={() => console.log('search')}
-					/>
-					<Item
-						label='Settings'
-						icon={Settings}
-						onClick={() => console.log('settings')}
-					/>
+					<Item label='Search' icon={Search} isSearch onClick={search.onOpen} />
+					<Item label='Settings' icon={Settings} onClick={settings.onOpen} />
 					<Item onClick={handleCreate} label='New page' icon={PlusCircle} />
 				</div>
 				<div className='mt-4'>
