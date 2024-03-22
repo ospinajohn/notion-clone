@@ -6,22 +6,24 @@ import { useUser } from '@clerk/clerk-react';
 import { useMutation } from 'convex/react';
 import { PlusCircle } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 const DocumentsPage = () => {
+	const router = useRouter();
 	const { user } = useUser();
 	const create = useMutation(api.documents.create);
 
 	const onCreate = async () => {
-		const document = await create({
-			title: 'Untitled',
-		});
+		const promise = create({ title: 'Untitled' }).then(documentId =>
+			router.push(`/documents/${documentId}`)
+		);
 
-		if (document) {
-			toast.success('Document created');
-		} else {
-			toast.error('Failed to create document');
-		}
+		toast.promise(promise, {
+			loading: 'Creating a new note...',
+			success: 'New note created!',
+			error: 'Failed to create a new note.',
+		});
 	};
 
 	return (
