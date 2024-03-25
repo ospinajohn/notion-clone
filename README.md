@@ -5,7 +5,8 @@ _El proyecto está hecho con Next.js, TailwindCSS, Convex, Shadcn ui, Zustand, e
 
 ## Imagenes del proyecto
 
-![image](![image1](![image](https://github.com/ospinajohn/notion-clone/assets/93017179/5e248926-f39a-4fd0-889a-29ab28fe548e)))
+![image](https://github.com/ospinajohn/notion-clone/assets/93017179/4f8fdb2b-bda6-493a-9897-5924d089ea29)
+
 
 ![image](https://github.com/ospinajohn/notion-clone/assets/93017179/dfc9340a-3945-4fa7-901d-12ee386673cb)
 
