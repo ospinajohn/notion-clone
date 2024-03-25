@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Notion clone
 
-## Getting Started
+_Este proyecto es un clon de la aplicación Notion, en la cual se pueden crear notas, subir archivos, etc..._
+_El proyecto está hecho con Next.js, TailwindCSS, Convex, Shadcn ui, Zustand, entre otros..._
 
-First, run the development server:
+## Imagenes del proyecto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+![image](![image1](image.png))
+
+### Pre-requisitos 📋
+
+_Para poder correr el proyecto, necesitas tener instalado Node.js en tu computadora_
+
+```
+https://nodejs.org/es/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Instalación 🔧
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+_Para instalar el proyecto, primero debes clonar el repositorio_
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+git clone
+```
 
-## Learn More
+_Luego debes instalar las dependencias_
 
-To learn more about Next.js, take a look at the following resources:
+```
+npm install
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+_Y por último, debes correr el proyecto_
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```
+npm run dev
+```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
